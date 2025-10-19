@@ -1,0 +1,25 @@
+
+name: Weekly New Companies Job
+ 
+on:
+  schedule:
+    - cron: "30 2 * * 1"   # 08:00 UTC every Monday
+  workflow_dispatch:       # allows manual "Run workflow" button
+ 
+jobs:
+  run-weekly:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - run: npm install
+      - name: Run weekly job
+        env:
+          DGI_API_KEY: "579b464db66ec23bdd000001b25836ba380444dc59376763badad6ba"
+          DGI_RESOURCE_ID: "4dbe5667-7b6b-41d7-82af-211562424d9a"
+          BREVO_API_KEY: "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"
+          MAIL_FROM: "vijaychettinese@gmail.com"
+          MAIL_TO: "Vijay@yesoryes.in" 
+        run: node weekly_job.mjs
